@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <!-- so meta -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- so meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
@@ -46,12 +46,12 @@
     <!-- rss -->
     
     
-<meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="leelwre" type="application/atom+xml">
-</head>
-
-<body class="max-width mx-auto px3 ltr">
+      <link rel="alternate" href="/atom.xml" title="leelwre" type="application/atom+xml" />
     
-    <div class="content index py4">
+<meta name="generator" content="Hexo 4.2.1"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+<body class="max-width mx-auto px3 ltr">    
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="content index py4">
         
           <header id="header">
   <a href="/">
@@ -70,13 +70,15 @@
         <a href="#"><i class="fas fa-bars fa-2x"></i></a>
       </li>
        
+        <li><a href="/search/">Search</a></li>
+       
         <li><a href="/">Home</a></li>
        
         <li><a href="/about/">About</a></li>
        
         <li><a href="/archives/">Writing</a></li>
        
-        <li><a href="/projects_url">Projects</a></li>
+        <li><a href="/categories/">categories</a></li>
       
     </ul>
   </div>
@@ -100,7 +102,7 @@
         
       
         
-          <a class="icon" target="_blank" rel="noopener" href="leelwre@gmail.com">
+          <a class="icon" target="_blank" rel="noopener" href="mailto:leelwre@gmail.com">
             <i class="fas fa-envelope"></i><!--
       ---></a><!--
       ---><!--
@@ -125,7 +127,7 @@
     <div class="meta">
       
         
-          <time datetime="2020-06-20T06:37:00.680Z" itemprop="datePublished">2020-06-20</time>
+          <time datetime="2020-07-04T03:44:16.000Z" itemprop="datePublished">2020-07-04</time>
         
       
     </div>
@@ -154,10 +156,14 @@
     
     2020
     leelwre
+    <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+    
   </div>
   <div class="footer-right">
     <nav>
       <ul>
+         
+          <li><a href="/search/">Search</a></li>
          
           <li><a href="/">Home</a></li>
          
@@ -165,12 +171,13 @@
          
           <li><a href="/archives/">Writing</a></li>
          
-          <li><a href="/projects_url">Projects</a></li>
+          <li><a href="/categories/">categories</a></li>
         
       </ul>
     </nav>
   </div>
 </footer>
+
 
     </div>
     <!-- styles -->
@@ -201,6 +208,23 @@
 
 <!-- Disqus Comments -->
 
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
