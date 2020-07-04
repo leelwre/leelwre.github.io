@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="共空间模式滤波：一种脑电信号解码方法  写在前面的话   本文主要基于swolf的博客中的一篇文章详解CSP完成，且仅详细推导了其中前两种表述形式，是笔者在学习了《矩阵理论》课程后对学习结果进行应用的一种记录。与swolf文章的主要区别在于补充了其中一些省略的推导步骤，最后参考[2]中的一幅图进行计算与结果展示，并附上了代码。 摘要   空间滤波器对于分析脑电信号、提高信噪比非常有效。其中，共空">
+    <meta name="description" content="写在前面的话   本文主要基于swolf的博客中的一篇文章详解CSP完成，且仅详细推导了其中前两种表述形式，是笔者在学习了《矩阵理论》课程后对学习结果进行应用的一种记录。与swolf文章的主要区别在于补充了其中一些省略的推导步骤，最后参考[2]中的一幅图进行计算与结果展示，并附上了代码。 摘要   空间滤波器对于分析脑电信号、提高信噪比非常有效。其中，共空间模式是最常用的一类空间滤波算法，尤其在运">
 <meta property="og:type" content="article">
 <meta property="og:title" content="共空间模式（common spatial pattern, CSP)">
 <meta property="og:url" content="http://leelwre.github.io/BCI/CSP.html">
 <meta property="og:site_name" content="leelwre">
-<meta property="og:description" content="共空间模式滤波：一种脑电信号解码方法  写在前面的话   本文主要基于swolf的博客中的一篇文章详解CSP完成，且仅详细推导了其中前两种表述形式，是笔者在学习了《矩阵理论》课程后对学习结果进行应用的一种记录。与swolf文章的主要区别在于补充了其中一些省略的推导步骤，最后参考[2]中的一幅图进行计算与结果展示，并附上了代码。 摘要   空间滤波器对于分析脑电信号、提高信噪比非常有效。其中，共空">
+<meta property="og:description" content="写在前面的话   本文主要基于swolf的博客中的一篇文章详解CSP完成，且仅详细推导了其中前两种表述形式，是笔者在学习了《矩阵理论》课程后对学习结果进行应用的一种记录。与swolf文章的主要区别在于补充了其中一些省略的推导步骤，最后参考[2]中的一幅图进行计算与结果展示，并附上了代码。 摘要   空间滤波器对于分析脑电信号、提高信噪比非常有效。其中，共空间模式是最常用的一类空间滤波算法，尤其在运">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://pic.yupoo.com/leelwre/3e1338bd/50951e19.png">
 <meta property="article:published_time" content="2020-07-04T03:44:16.000Z">
-<meta property="article:modified_time" content="2020-07-04T06:56:31.428Z">
+<meta property="article:modified_time" content="2020-07-04T11:48:41.748Z">
 <meta property="article:author" content="leelwre">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://pic.yupoo.com/leelwre/3e1338bd/50951e19.png">
@@ -147,15 +147,24 @@
 
       
 
+      <span class="entry-date">
+        <span class="fa fa-keyboard" aria-hidden="true"></span>
+        <span class="post-count">3.6k</span>字                      
+      </span>        
+      <span class="entry-date">
+        <span class="fa fa-hourglass-half" aria-hidden="true"></span>
+        <span class="post-count">15</span>分钟                      
+      </span>  
+      <span id="w1suKhXakrRfsMCrEa0EWGdT-gzGzoHsz" class="leancloud_visitors" data-flag-title="Your Article Title">
+      <em class="post-meta-item-text">阅读量 </em>
+      <i class="leancloud-visitors-count">1000000</i>
+</span>
     </div>
   </header>
   
 
   <div class="content" itemprop="articleBody">
-    <center>
-<font face = "黑体" size = 6><strong>共空间模式滤波：一种脑电信号解码方法</strong></font>
-</center>
-<h1 id="写在前面的话"><font size = 4>写在前面的话</font></h1>
+    <h1 id="写在前面的话"><font size = 4>写在前面的话</font></h1>
 <p>  本文主要基于swolf的博客中的一篇文章<a href="https://mrswolf.github.io/zh-cn/2019/01/06/%E8%AF%A6%E8%A7%A3CSP/" target="_blank" rel="noopener">详解CSP</a>完成，且仅详细推导了其中前两种表述形式，是笔者在学习了《矩阵理论》课程后对学习结果进行应用的一种记录。与swolf文章的主要区别在于补充了其中一些省略的推导步骤，最后参考<a href="#2">[2]</a>中的一幅图进行计算与结果展示，并附上了代码。</p>
 <h1 id="摘要"><font size = 4>摘要</font></h1>
 <p>  空间滤波器对于分析脑电信号、提高信噪比非常有效。其中，共空间模式是最常用的一类空间滤波算法，尤其在运动想象范式分类上具有较好的效果，是运动想象范式的基准算法之一。因此，本文结合矩阵理论知识，从共空间模式的原始算法出发，逐步推导计算，并介绍其第二种表述形式，旨在阐明这一算法的数学思想，最后，结合少量模拟样本，更直观地展示了该算法的作用。</p>
